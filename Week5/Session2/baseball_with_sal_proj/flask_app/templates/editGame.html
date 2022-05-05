@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Edit Game</title>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h2>Edit {{game.theTeams()}}</h2>
+        <form action="/games/{{game.id}}/update" method='post'>
+            <input name="id" type="hidden" value="{{game.id}}">
+            <section>
+                <label for="team1">Team 1</label>
+                <input type="text" name="team1" value="{{game.team1}}">
+            </section>
+            <section>
+                <label for="team2">Team 2</label>
+                <input type="text" name="team2" value="{{game.team2}}">
+            </section>
+            <section>
+                <label for="finalScore">Final Score</label>
+                <input type="text" name="finalScore" value="{{game.finalScore}}">
+            </section>
+            <section>
+                <label for="gameInfo">Game Information</label>
+                <textarea name="gameInfo"  cols="30" rows="10">{{game.gameInfo}}</textarea>
+            </section>
+            <section>
+                <label for="gameDate">Game Date</label>
+                <input type="date" name="gameDate" value="{{game.gameDate}}">
+            </section>
+            <button>Edit Game</button>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

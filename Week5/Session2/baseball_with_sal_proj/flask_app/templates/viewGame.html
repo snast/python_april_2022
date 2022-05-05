@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>View Game</title>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome {{user.firstName}}</h1>
+        <h1>Welcome {{user.fullName()}}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Final Score</th>
+                    <th>Game Info</th>
+                    <th>Game Date</th>
+                    <th>Uploaded by</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{game.theTeams()}}</td>
+                        <td>{{game.finalScore}}</td>
+                        <td>{{game.gameInfo}}</td>
+                        <td>{{game.gameDate}}</td>
+                        <td>{{game.user.firstName}} {{game.user.lastName}}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

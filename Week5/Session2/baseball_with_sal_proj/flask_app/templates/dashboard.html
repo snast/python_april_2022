@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome {{user.firstName}}</h1>
+        <h1>Welcome {{user.fullName()}}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                    <tr>
+                        <td>{{game.theTeams()}}</td>
+                        <td><a href='/games/{{game.id}}'>View</a>
+                            {% if game.user.id == session.user_id %}
+                                <a href='/games/{{game.id}}/edit'>Edit</a>
+                                <form action="/games/{{game.id}}/delete" method="POST">
+                                    <input name="id" type="hidden" value="{{game.id}}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

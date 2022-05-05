@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Directors</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h1>Show All Directors</h1>
+    {% for director in directors %}
+        {{director.name}}
+    {% endfor %}
+    <h3>Create a New Director</h3>
+    <form action="/directors/create" method="POST">
+        Name: <input name="director_name">
+        <button type="submit">Create a New Director!</button>
+    </form>
+</body>
+</html>
