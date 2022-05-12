@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Edit {{review.title}}'s Review!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>Edit {{review.title}}'s Review!</h1>
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for message in messages %}            <!-- loop through the messages -->
+                    <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/reviews/{{review.id}}/update" method='post'>
+            <input name="id" type="hidden" value="{{review.id}}">
+            <section>
+                <label for="title">Title:</label>
+                <input name="title" type="text" value="{{review.title}}">
+            </section>
+            <section>
+                <label for="content">Review:</label>
+                <textarea name="content" rows="4" cols="50">{{review.content}}</textarea>
+            </section>
+            <section>
+                <label for="rating">Rating:</label>
+                <select name="rating" type="number">
+                    {% if review.rating == 0 %}
+                        <option value=0 selected>0</option>
+                    {% else %}
+                        <option value=0>0</option>
+                    {% endif %}
+                    {% if review.rating == 1 %}
+                        <option value=1 selected>1</option>
+                    {% else %}
+                        <option value=1>1</option>
+                    {% endif %}
+                    {% if review.rating == 2 %}
+                        <option value=2 selected>2</option>
+                    {% else %}
+                        <option value=2>2</option>
+                    {% endif %}
+                    {% if review.rating == 3 %}
+                        <option value=3 selected>3</option>
+                    {% else %}
+                        <option value=3>3</option>
+                    {% endif %}
+                    {% if review.rating == 4 %}
+                        <option value=4 selected>4</option>
+                    {% else %}
+                        <option value=4>4</option>
+                    {% endif %}
+                    {% if review.rating == 5 %}
+                        <option value=5 selected>5</option>
+                    {% else %}
+                        <option value=5>5</option>
+                    {% endif %}
+                </select>
+            </section>
+            <section>
+                <label for="date_watched">Date Watched:</label>
+                <input name="date_watched" type="date" value="{{review.date_watched.strftime('%Y-%m-%d')}}">
+            </section>
+            <button>Edit Movie Review</button>
+        </form>
+    </main>
+</body>
+</html>

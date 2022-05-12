@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{review.title}}'s Review!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>{{review.title}}'s Review!</h1>
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for message in messages %}            <!-- loop through the messages -->
+                    <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <p>Title: {{review.title}}</p>
+        <p>Review Content: {{review.content}}</p>
+        <p>Rating: {{review.rating}}</p>
+        <p>Date Watched: {{review.date_watched}}</p>
+        <p>Review Written By: {{review.user.first_name}} {{review.user.last_name}}</p>
+    </main>
+</body>
+</html>
