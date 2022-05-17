@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Edit {{review.title}}'s Review!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h1>Edit {{review.title}}'s Review!</h1>
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for message in messages %}            <!-- loop through the messages -->
+                    <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/reviews/{{review.id}}/update" method='post'>
+            <input name="id" type="hidden" value="{{review.id}}">
+            <section>
+                <label for="title">Title:</label>
+                <input name="title" type="text" value="{{review.title}}">
+            </section>
+            <section>
+                <label for="content">Review:</label>
+                <textarea name="content" rows="4" cols="50">{{review.content}}</textarea>
+            </section>
+            <section>
+                <label for="rating">Rating:</label>
+                <select name="rating" type="number">
+                    {% for num in range(0,6)%}
+                        {% if review.rating == num %}
+                        <option value="{{num}}" selected>{{num}}</option>
+                        {% else %}
+                        <option value="{{num}}">{{num}}</option>
+                        {% endif %}
+                    {% endfor %}
+                    
+                </select>
+            </section>
+            <section>
+                <label for="date_watched">Date Watched:</label>
+                <input name="date_watched" type="date" value="{{review.date_watched.strftime('%Y-%m-%d')}}">
+            </section>
+            <button>Edit Movie Review</button>
+        </form>
+    </main>
+</body>
+</html>

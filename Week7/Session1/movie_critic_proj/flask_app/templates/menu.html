@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    {% block menu %}
+    <h1>Movie Critic</h1>
+    <a href="/reviews">Home</a>
+    <a href="/reviews/new">Add a New Review</a>
+    {% if 'user_id' in session %}
+        <a href="/logout">Logout</a>
+    {% endif %}
+    {% endblock menu %}
+</body>
+</html>
