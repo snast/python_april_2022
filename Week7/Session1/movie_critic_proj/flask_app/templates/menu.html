@@ -5,6 +5,12 @@
     <h1>Movie Critic</h1>
     <a href="/reviews">Home</a>
     <a href="/reviews/new">Add a New Review</a>
+    <form action="/reviews">
+        <button type="submit">Reviews</button>
+    </form>
+    <form action="/logout">
+        <button type="submit">Logout</button>
+    </form>
     {% if 'user_id' in session %}
         <a href="/logout">Logout</a>
     {% endif %}

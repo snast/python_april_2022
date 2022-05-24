@@ -52,7 +52,7 @@ def edit_form(id):
     }
     review = Review.getOne(review_data)
     if review:
-        if review.user.id != session['user_id']:
+        if review.creator.id != session['user_id']:
             flash(f'Unauthorized user attempting to edit review: {review.title}', 'error')
             return redirect('/reviews')
         else:
@@ -74,7 +74,7 @@ def delete_review(id):
         'id': id
     }
     review = Review.getOne(review_data)
-    if review.user.id != session['user_id']:
+    if review.creator.id != session['user_id']:
         flash(f'Unauthorized user attempting to delete review: {review.title}', 'error')
         return redirect('/reviews')
     if not Review.validate_review(request.form):
